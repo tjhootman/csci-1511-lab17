@@ -42,11 +42,22 @@ for repo_dict in repo_dicts:
 title = "Most-Starred Java Projects on GitHub"
 labels = {'x': 'Repository', 'y': 'Stars'}
 fig = px.bar(x=repo_links, y=stars, title=title, labels=labels,
-             hover_name=hover_texts)
+             hover_name=hover_texts, color=stars,
+             color_continuous_scale=px.colors.sequential.Viridis)
 
-fig.update_layout(title_font_size=28, xaxis_title_font_size=20,
-                  yaxis_title_font_size=20)
+fig.update_layout(
+                title_font_size=28,
+                title_x=0.5,
+                title_font_color='white',
+                xaxis_title_font_size=20,
+                yaxis_title_font_size=20,
+                xaxis_tickangle=45,
+                plot_bgcolor='black',
+                paper_bgcolor='black',
+                font_color='white',
+                hoverlabel=dict(bgcolor="gray", font_color='white')
+                )
 
-fig.update_traces(marker_color='SteelBlue', marker_opacity=0.6)
+fig.update_traces(opacity=0.7)
 
 fig.show()
