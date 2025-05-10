@@ -23,16 +23,18 @@ repo_dicts = response_dict['items']
 repo_links, stars, hover_texts = [], [], []
 for repo_dict in repo_dicts:
     # Turn repo names into active links.
-    repo_name = repo_dict['name']
-    repo_url = repo_dict['html_url']
+    repo_name = repo_dict.get('name', 'No Name Available')
+    repo_url = repo_dict.get('html_url', '#')
     repo_link = f"<a href='{repo_url}'>{repo_name}</a>"
     repo_links.append(repo_link)
 
-    stars.append(repo_dict['stargazers_count'])
+    stars_count = repo_dict.get('stargazers_count', 0)
+    stars.append(stars_count)
 
     # Build hover texts.
-    owner = repo_dict['owner']['login']
-    description = repo_dict['description']
+    owner_data = repo_dict.get('owner', {})
+    owner = owner_data.get('login', 'Unknown Owner')
+    description = repo_dict.get('description', 'No Description provided')
     hover_text = f"{owner}<br />{description}"
     hover_texts.append(hover_text)
 
